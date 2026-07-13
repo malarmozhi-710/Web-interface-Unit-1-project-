@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Stopwatch</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+}
+
+.container{
+    width:400px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1{
+    margin-bottom:20px;
+    color:#333;
+}
+
+#display{
+    font-size:45px;
+    font-weight:bold;
+    background:#f4f4f4;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:25px;
+    letter-spacing:2px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+.start{
+    background:#28a745;
+}
+
+.stop{
+    background:#dc3545;
+}
+
+.reset{
+    background:#ffc107;
+    color:black;
+}
+
+.lap{
+    background:#007bff;
+}
+
+.lap-box{
+    margin-top:25px;
+    text-align:left;
+}
+
+.lap-box h3{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+#laps{
+    max-height:180px;
+    overflow-y:auto;
+}
+
+#laps li{
+    list-style:none;
+    background:#f4f4f4;
+    margin:8px 0;
+    padding:10px;
+    border-left:5px solid #2575fc;
+    border-radius:6px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⏱ Dynamic Stopwatch</h1>
+
+    <div id="display">00:00:00</div>
+
+    <div class="buttons">
+        <button class="start" onclick="startWatch()">Start</button>
+        <button class="stop" onclick="stopWatch()">Stop</button>
+        <button class="reset" onclick="resetWatch()">Reset</button>
+        <button class="lap" onclick="lapWatch()">Lap</button>
+    </div>
+
+    <div class="lap-box">
+        <h3>Lap Times</h3>
+        <ul id="laps"></ul>
+    </div>
+
+</div>
+
+<script>
+
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+
+let timer = null;
+let lapCount = 1;
+
+function updateDisplay(){
+
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("display").innerHTML =
+        h + ":" + m + ":" + s;
+}
+
+function startWatch(){
+
+    if(timer != null)
+        return;
+
+    timer = setInterval(function(){
+
+        seconds++;
+
+        if(seconds == 60){
+            seconds = 0;
+            minutes++;
+        }
+
+        if(minutes == 60){
+            minutes = 0;
+            hours++;
+        }
+
+        updateDisplay();
+
+    },1000);
+
+}
+
+function stopWatch(){
+
+    clearInterval(timer);
+    timer = null;
+
+}
+
+function resetWatch(){
+
+    stopWatch();
+
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    lapCount = 1;
+
+    updateDisplay();
+
+    document.getElementById("laps").innerHTML = "";
+
+}
+
+function lapWatch(){
+
+    if(hours == 0 && minutes == 0 && seconds == 0){
+        alert("Start the stopwatch first!");
+        return;
+    }
+
+    let li = document.createElement("li");
+
+    li.innerHTML = "Lap " + lapCount + " : " +
+                   document.getElementById("display").innerHTML;
+
+    document.getElementById("laps").appendChild(li);
+
+    lapCount++;
+
+}
+
+updateDisplay();
+
+</script>
+
+</body>
+</html>
