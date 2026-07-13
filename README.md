@@ -13,4 +13,5 @@ A simple and responsive stopwatch web application built using **HTML**, **CSS**,
 - 🎨 Modern gradient UI
 - ## 📸 Preview
 
-![Dynamic Stopwatch](stopwatch.png)
+<img width="700" height="600" alt="stopwatch" src="https://github.com/user-attachments/assets/6b850f94-6b88-4a6f-9a6c-4d746d2ff332" />
+
