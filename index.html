@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personalized Task Manager</title>
+
+    <link rel="icon" href="logo.png" />
+    <link rel="stylesheet" href="../Css/app-ui.css" />
+    <link rel="stylesheet" href="today.CSS" />
+  </head>
+  <body>
+    <div class="dashboard">
+      
+
+      <main class="main-content">
+        <header class="top-bar">
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu">&#9776;</button>
+
+          <div class="brand-wrap">
+            <img src="logo.png" alt="Task manager logo" />
+            <div>
+              <h2>Personalized Task Manager</h2>
+              <p>Plan your day and track your progress</p>
+            </div>
+          </div>
+
+          <div class="top-actions">
+            <button class="icon-btn" type="button" data-profile-btn aria-label="Profile" aria-expanded="false" title="Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2-8 4.5V21h16v-2.5C20 16 16.42 14 12 14Z"
+                />
+              </svg>
+            </button>
+
+            <button class="reward-btn icon-btn" type="button" data-rewards-btn aria-label="Rewards" title="Rewards">🏆</button>
+
+            <div class="profile-popover" id="profilePopover" hidden>
+              <div class="profile-head">
+                <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Add profile photo" title="Add photo">
+                  <img id="profileAvatar" alt="Profile photo" />
+                  <span id="profileAvatarFallback" class="avatar-fallback"></span>
+                </button>
+                <div class="profile-meta">
+                  <div id="profileName" class="profile-name"></div>
+                  <div class="profile-sub">Completed: <span id="profileCompleted">0</span></div>
+                </div>
+              </div>
+
+              <div class="profile-actions">
+                <label class="theme-row" for="themeToggleSwitch">
+                  <span>Dark mode</span>
+                  <input type="checkbox" id="themeToggleSwitch" />
+                </label>
+                <a class="pop-link" href="leaderboard.html">
+                  <span>Leaderboard</span>
+                  <span class="chev">›</span>
+                </a>
+                <a class="pop-link" href="signup page.html" data-logout-link>
+                  <span>Logout</span>
+                  <span class="chev">›</span>
+                </a>
+                <input type="file" id="profilePhotoInput" accept="image/*" hidden />
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="card">
+          <h3>Add New Task</h3>
+          <form id="taskForm" class="task-form">
+            <input id="taskName" type="text" placeholder="Enter your task" required />
+            <select id="difficulty" required>
+              <option value="">Task Difficulty</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </select>
+            <input id="dueDate" type="date" required />
+            <input id="taskTime" type="number" placeholder="Time to complete (minutes)" required />
+            <button type="submit" class="add-btn">Add Task</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h3>Task List</h3>
+          <div id="taskList" class="task-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../Javascript/userStore.js"></script>
+    <script src="../Javascript/ui.js"></script>
+    <script src="../Javascript/nav.js"></script>
+    <script src="../Javascript/rewards.js"></script>
+    <script src="today.js"></script>
+  </body>
+</html>
